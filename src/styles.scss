@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+.dark-mode {
+    background-color: #303030;
+    a,
+    td,
+    th,
+    div,
+    span,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    ul,
+    li {
+        color: white !important;
+    }
+}
+
+td img {
+    height: 45px;
+    width: 45px;
+}
+
+li {
+    list-style: none;
+}

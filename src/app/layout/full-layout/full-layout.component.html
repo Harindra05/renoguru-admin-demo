@@ -1,0 +1,10 @@
+<app-header (toggleValue)="getData($event)" (colourChange)="getColourChange($event)"></app-header>
+<div class="d-flex" [ngClass]="colourChange? 'dark-mode':'light-mode'">
+    <div class="side-bar" [ngStyle]="colourChange?{'backgroundColor':'#6a6a6a38'}:{}" [ngClass]="toggle ? 'toggle_class' : 'toggle_classAfter'">
+        <app-side-bar>
+        </app-side-bar>
+    </div>
+    <div class="container-fluid p-4" [ngClass]="toggle ? 'toggle_sidebar' : 'toggle_sidebarAfter'">
+        <router-outlet></router-outlet>
+    </div>
+</div>

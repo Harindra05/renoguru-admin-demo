@@ -1,0 +1,97 @@
+<div class="d-flex">
+    <i class="fa fa-file fa-2x"></i> &nbsp;
+    <h3>Blogs</h3>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Dashboard</li>
+        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="">
+        <button class="btn btn-success f-right" (click)="openModal()" type="submit">Add Blog</button>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Blog Image
+                    </th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td>
+                        <img src="assets/img/user.jpg" alt="">
+                    </td>
+                    <td>{{item?.firstName}}</td>
+                    <td>{{item?.lastName}} </td>
+                    <td>{{item?.email}} </td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <!-- <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
+<div class="row">
+    <modal #myModal>
+        <modal-header>
+            <h6>Add Blog</h6>
+        </modal-header>
+        <modal-content>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <label for="file">Blog Image</label>
+                                <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
+                                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="title" class="form-control" id="title" formControlName="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <angular-editor [placeholder]="'Enter text here...'" formControlName="description" [config]="editorConfig"></angular-editor>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer>
+            <button class="btn btn-primary" (click)="submitBlog()">submit</button>
+            <button class="btn btn-secondary ml-2" (click)="closeModal()">close</button>
+        </modal-footer>
+    </modal>
+</div>

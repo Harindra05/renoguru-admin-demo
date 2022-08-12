@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light ">
+    <div class="container-fluid">
+        <a class="navbar-brand">
+            <i class="fa fa-bars" (click)="sideBarToggle()" aria-hidden="true"></i>
+            <span class="logo"><img src="assets/img/covid.jpeg" class="rounded-pill" width="60px" alt=""></span>
+        </a>
+
+        <div class="text-heading">
+            <h2>Admin Portal</h2>
+        </div>
+        <!-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+            </ul>
+            <span (click)="themesColourChange()" style="padding-right: 1rem;cursor: pointer;">
+
+                <i class="fa fa-sun-o fa-2x" aria-hidden="true" *ngIf="colour==false"></i>
+                <i class="fa fa-moon-o fa-2x" aria-hidden="true" *ngIf="colour==true"></i>
+            </span>
+
+
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success" type="submit" (click)="logout()">Logout</button>
+            </form>
+
+
+        </div>
+    </div>
+</nav>

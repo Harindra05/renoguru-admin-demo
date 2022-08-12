@@ -1,0 +1,58 @@
+.toggle_class {
+    width: 10%;
+    color: black;
+}
+
+.toggle_classAfter {
+    width: 0;
+    overflow: hidden;
+}
+
+.side-bar {
+    background-color: #F2F2F2;
+}
+
+.toggle_sidebar {
+    width: 100%;
+    overflow: visible;
+}
+
+.toggle_sidebarAfter {
+    width: 100%;
+}
+
+.dark-mode {
+    background-color: #333333;
+}
+
+.container-fluid {
+    height: 100vh;
+}
+
+@media screen and (max-width:1550px) {
+    .toggle_class {
+        width: 15%;
+        color: black;
+    }
+}
+
+@media screen and (max-width:820px) {
+    .toggle_class {
+        width: 25%;
+    }
+}
+
+@media screen and (max-width:576px) {
+    .d-flex {
+        position: relative;
+    }
+    .toggle_classAfter {
+        position: absolute;
+        width: 50%;
+        display: block;
+        height: 100vh;
+    }
+    .toggle_class {
+        display: none;
+    }
+}

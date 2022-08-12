@@ -1,0 +1,31 @@
+<div class="d-flex">
+    <i class="fa fa-home fa-2x"></i> &nbsp;
+    <h3>Dashboard</h3>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+    </ol>
+</nav>
+<!-- <div class="class">
+    <button class="btn btn-outline-success" routerLink="/dashbord-details">details</button>
+</div> -->
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <h5>Users</h5>
+        <canvas baseChart width="800" height="500" [type]="'line'" [data]="lineChartData" [options]="lineChartOptions" [legend]="lineChartLegend">
+        </canvas>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        <canvas baseChart width="800" height="500" [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend" [type]="'bar'">
+        </canvas>
+    </div>
+    <br>
+    <br>
+    <div class="col-sm-12 col-md-6 my-4">
+
+        <canvas baseChart width="200" height="300" [labels]="doughnutChartLabels" [datasets]="doughnutChartDatasets" [options]="doughnutChartOptions" [legend]="true" [type]="'doughnut'">
+        </canvas>
+    </div>
+</div>
