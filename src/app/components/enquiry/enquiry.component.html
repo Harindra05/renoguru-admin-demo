@@ -1,0 +1,73 @@
+<div class="d-flex">
+    <i class="fa fa-book fa-2x" aria-hidden="true"></i> &nbsp;
+    <h3>Enquiry</h3>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" routerLink="/dashboard">Dashboard</li>
+        <li class="breadcrumb-item active" aria-current="page">enquiry list</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        Designer need
+                    </th>
+                    <th scope="col">
+                        Property Type
+                    </th>
+                    <th scope="col">No. Of Bedrooms</th>
+                    <th scope="col">Property Status</th>
+                    <th scope="col">Areas Need To Renovate</th>
+                    <th scope="col">Property Address</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Key Collection Period</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">User Enquiry Type</th>
+                    <th scope="col">FullName</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Other Information</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td>{{item?.designerNeed}}</td>
+                    <td>{{item.propertyTypeId==1 ? 'Apartment': item.propertyTypeId==2 ? 'Condo' : item.propertyTypeId==3 ? 'HDB' : item.propertyTypeId==4 ? 'Landed' : item.propertyTypeId==5 ? 'Office' : item.propertyTypeId==6 ? 'Private House' : 'Retail'}}</td>
+                    <td>{{item?.noOfBedrooms==1 ? 'Studio':item?.noOfBedrooms==2 ? '2 Rooms':item?.noOfBedrooms==3 ? '3 Rooms':item?.noOfBedrooms==4 ? '4 Rooms':item?.noOfBedrooms==5 ? '5 Rooms':'5+ Rooms'}} </td>
+                    <td>{{item?.propertyStatus}} </td>
+                    <td>{{item?.areasNeedToRenovate}}</td>
+                    <td>{{item?.propertyAddress}}</td>
+                    <td>{{item?.budget}}</td>
+                    <td>{{item?.keyCollectionPeriod}}</td>
+                    <td>{{item?.renovationLoan?'Yes':'No'}}</td>
+                    <td>{{item?.priority}}</td>
+                    <td>{{item?.userEnquiryType}}</td>
+                    <td>{{item?.fullName}}</td>
+                    <td>{{item?.email}}</td>
+                    <td>{{item?.phone}}</td>
+                    <td>{{item?.otherInformation}}</td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>

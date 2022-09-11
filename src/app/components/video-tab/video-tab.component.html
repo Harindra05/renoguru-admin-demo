@@ -2,42 +2,44 @@
     <div id="spinner"></div>
 </div>
 <div class="d-flex">
-    <i class="fa fa-file fa-2x"></i> &nbsp;
-    <h3>Blogs</h3>
+    <i class="fa fa-youtube-play fa-2x"></i> &nbsp;
+    <h3>Videos</h3>
 </div>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Dashboard</li>
-        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+        <li class="breadcrumb-item active" aria-current="page">Video</li>
     </ol>
 </nav>
 
 <div class="row">
     <div class="mb-3">
-        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Blog</button>
+        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Video</button>
     </div>
     <div class="col-12 table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">
-                        Blog Image
+                        Video Thumbnail
                     </th>
                     <th scope="col">Title</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Video Url</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
                     <td>
-                        <img src="{{item.image?item.image:'assets/img/user.jpg'}}" alt="">
+                        <img src="{{item.thumbnail?item.thumbnail:'assets/img/user.jpg'}}" alt="">
                     </td>
                     <td>{{item?.title}}</td>
-                    <td class="text-description">
-                        <p class="description">{{item?.description}}</p>
+                    <td>
+                        <p class="">{{item?.description}}</p>
                     </td>
+                    <td>{{item?.video_url}}</td>
                     <td>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -55,11 +57,11 @@
         </table>
     </div>
 </div>
-<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
+<!-- <pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls> -->
 <div class="row">
     <modal #myModal>
         <modal-header>
-            <h6>{{addUpdate}} Blog</h6>
+            <h6>{{addUpdate}} Video</h6>
         </modal-header>
         <modal-content>
             <div class="container">
@@ -67,14 +69,17 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
                         <form [formGroup]="form">
                             <div class="form-group">
-                                <label for="file">Blog Image</label>
+                                <label for="file">Video thumbnail</label>
                                 <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
                                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                                         <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                                     </ngx-dropzone-image-preview>
                                 </ngx-dropzone>
                             </div>
-
+                            <div class="form-group">
+                                <label for="file"> Choose Video </label><br>
+                                <input type='file' (change)="onSelectFile($event)">
+                            </div>
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="title" class="form-control" id="title" formControlName="title">
@@ -89,7 +94,7 @@
             </div>
         </modal-content>
         <modal-footer>
-            <button class="btn btn-primary" (click)="submitBlog()">submit</button>
+            <button class="btn btn-primary" (click)="submitVideo()">submit</button>
             <button class="btn btn-secondary ml-2" (click)="closeModal()">close</button>
         </modal-footer>
     </modal>

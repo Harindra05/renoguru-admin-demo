@@ -10,11 +10,11 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-blogs',
-  templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.scss']
+  selector: 'app-inspirations',
+  templateUrl: './inspirations.component.html',
+  styleUrls: ['./inspirations.component.scss']
 })
-export class BlogsComponent implements OnInit {
+export class InspirationsComponent implements OnInit {
   files: File[] = [];
   listDetails: Array<any>=[];
   count: any;
@@ -74,13 +74,14 @@ export class BlogsComponent implements OnInit {
     this.form = this.fb.group({
       id:[null],
       title:['',Validators.required],
+      type:['',Validators.required],
       description:['',Validators.required]
     });
-    await this.getBlogList();
+    await this.getInspirationList();
   }
-  async getBlogList() {
+  async getInspirationList() {
     try {
-      let data = await this.api.post("blogs",{
+      let data = await this.api.post("inspirations",{
         "limit": 10000,
         "offset": 0
     });
@@ -105,6 +106,7 @@ export class BlogsComponent implements OnInit {
       this.form.patchValue({
         id:item.id,
         title:item.title,
+        type:item.type,
         description:item.description
       })
       await this.getBase64FromUrl(item.image).then((result:any)=>{
@@ -118,7 +120,8 @@ export class BlogsComponent implements OnInit {
       this.addUpdate='Add';
       this.form.patchValue({
         title:'',
-        description:''
+        description:'',
+        type:''
       })
     }
     this.modalRef = this.modalService.open(this.myModal, {
@@ -176,11 +179,11 @@ async submitBlog(){
   }
   this.form.value.image=this.image;
   try {
-    let data = await this.api.post('blogs/upsert',this.form.value)
+    let data = await this.api.post('inspirations/upsert',this.form.value)
     if(data.success){
       this.toast.success(data.message)
       this.closeModal();
-      await this.getBlogList();
+      await this.getInspirationList();
       this.isLoading=false;
     } 
   } catch (error) {
@@ -205,7 +208,7 @@ async delete(item:any){
     let data = await this.api.post('blogs/upsert',items);
     if(data.success){
       this.toast.success("Blog deleted successfully");
-      await this.getBlogList();
+      await this.getInspirationList();
     }
   } catch (error) {
   } 
@@ -215,3 +218,4 @@ async delete(item:any){
     this.image = this.image.Location;
 }
 }
+

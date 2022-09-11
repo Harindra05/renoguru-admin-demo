@@ -4,11 +4,11 @@ import { ApiService } from 'src/app/services/api.service';
 import { CustomPaginationService } from 'src/app/services/pagination-service';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  selector: 'app-enquiry',
+  templateUrl: './enquiry.component.html',
+  styleUrls: ['./enquiry.component.scss']
 })
-export class UserComponent implements OnInit {
+export class EnquiryComponent implements OnInit {
 
   listDetails: Array<any>=[];
   count: any
@@ -16,11 +16,11 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.count = this.pagination.config
-    this.getUserList();
+    this.getEnquiryList();
   }
-  async getUserList() {
+  async getEnquiryList() {
     try {
-      let data = await this.api.post("auth/admin/users",{
+      let data = await this.api.post("enquiry/list",{
         "limit": 500,
         "offset": 0
     });
@@ -39,9 +39,10 @@ export class UserComponent implements OnInit {
       let data = await this.api.post('auth/delete',{userId:item});
       if(data.success){
         this.toast.success("User deleted successfully");
-        await this.getUserList();
+        await this.getEnquiryList();
       }
     } catch (error) {
     } 
   }
+
 }

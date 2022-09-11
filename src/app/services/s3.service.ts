@@ -14,8 +14,8 @@ export class UploadS3Service {
     return new Promise((resolve, reject) => {
       const contentType = file.type;
       const bucket = new S3({
-        accessKeyId: 'AKIAZKYXAHB4763SWU4G',
-        secretAccessKey: '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',
+        accessKeyId: 'AKIAZKYXAHB4WE2IOGJC',
+        secretAccessKey: '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',
         region: 'us-east-1'
       });
       const params = {
@@ -48,8 +48,8 @@ export class UploadS3Service {
       };
          const bucket = new S3(
         {
-          accessKeyId: 'AKIAZKYXAHB4763SWU4G',
-          secretAccessKey: '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',
+          accessKeyId: 'AKIAZKYXAHB4WE2IOGJC',
+          secretAccessKey: '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',
           region: 'us-east-1'
         }
       );

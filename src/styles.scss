@@ -1,6 +1,62 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+$primary-color: #5ea51d;
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $primary-color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#spinner {
+    -webkit-animation: frames 1s infinite linear;
+    animation: frames 1s infinite linear;
+    background: transparent;
+    border: 0.40vw solid #FFF;
+    border-radius: 100%;
+    border-top-color: #5ea51d;
+    width: 3vw;
+    height: 3vw;
+    opacity: .6;
+    padding: 0;
+    position: absolute;
+    z-index: 999;
+}
+
+@keyframes frames {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+
+#pause {
+    display: block;
+    background: #12121294 no-repeat 0 0;
+    // background: rgb(255, 250, 250) no-repeat 0 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999999999;
+}
+
 .dark-mode {
     background-color: #303030;
     a,
@@ -21,11 +77,54 @@
     }
 }
 
+.table>thead {
+    vertical-align: bottom;
+    background: #4da0fc1a;
+}
+
 td img {
-    height: 45px;
-    width: 45px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50px;
+}
+
+tbody tr:hover {
+    cursor: pointer;
+    background-color: #dee0e174;
 }
 
 li {
     list-style: none;
+    cursor: pointer;
+}
+
+.f-right {
+    float: right;
+}
+
+.ml-2 {
+    margin-left: 1rem;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+.form-group {
+    padding-bottom: 1rem;
+}
+
+td.text-description {
+    width: 600px;
+    min-height: 120px;
+    p.description {
+        margin-bottom: 0px;
+        overflow: auto;
+        max-height: 120px;
+        overflow-x: hidden;
+    }
+}
+
+.my-pagination {
+    text-align: right;
 }

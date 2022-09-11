@@ -3,28 +3,29 @@
 </div>
 <div class="d-flex">
     <i class="fa fa-file fa-2x"></i> &nbsp;
-    <h3>Blogs</h3>
+    <h3>Trending</h3>
 </div>
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Dashboard</li>
-        <li class="breadcrumb-item active" aria-current="page">Blogs</li>
+        <li class="breadcrumb-item active" aria-current="page">Trending</li>
     </ol>
 </nav>
 
 <div class="row">
     <div class="mb-3">
-        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Blog</button>
+        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Trending</button>
     </div>
     <div class="col-12 table-responsive">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">
-                        Blog Image
+                        Trending Image
                     </th>
                     <th scope="col">Title</th>
+                    <th scope="col">Type</th>
                     <th scope="col">Description</th>
                     <th scope="col">Action</th>
                 </tr>
@@ -35,7 +36,8 @@
                         <img src="{{item.image?item.image:'assets/img/user.jpg'}}" alt="">
                     </td>
                     <td>{{item?.title}}</td>
-                    <td class="text-description">
+                    <td>{{item.type==1 ? 'Scandinavian': item.type==2 ? 'Minimalist' : item.type==3 ? 'Modern' : item.type==4 ? 'Contemporary' : 'Industrial'}}</td>
+                    <td>
                         <p class="description">{{item?.description}}</p>
                     </td>
                     <td>
@@ -59,7 +61,7 @@
 <div class="row">
     <modal #myModal>
         <modal-header>
-            <h6>{{addUpdate}} Blog</h6>
+            <h6>{{addUpdate}} Trending</h6>
         </modal-header>
         <modal-content>
             <div class="container">
@@ -67,7 +69,7 @@
                     <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
                         <form [formGroup]="form">
                             <div class="form-group">
-                                <label for="file">Blog Image</label>
+                                <label for="file">Trendings Image</label>
                                 <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
                                     <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
                                         <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
@@ -78,6 +80,16 @@
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="title" class="form-control" id="title" formControlName="title">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Trending type</label>
+                                <select type="text" class="form-control" id="title" formControlName="type">
+                                    <option value="0">Scandinavian</option>
+                                    <option value="1">Minimalist</option>
+                                    <option value="2">Modern</option>
+                                    <option value="3">Contemporary</option>
+                                    <option value="4">Industrial</option>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>

@@ -5,7 +5,7 @@
 
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item">Dashboard</li>
+        <li class="breadcrumb-item" routerLink="/dashboard">Dashboard</li>
         <li class="breadcrumb-item active" aria-current="page">users</li>
     </ol>
 </nav>
@@ -46,12 +46,8 @@
                                 <i class='fa fa-bars'></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
-                                <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
-                                <!-- <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                <li><a class="dropdown-item" (click)="delete(item.id)">Delete</a></li>
+                           
                             </ul>
                         </li>
                     </td>

@@ -6,66 +6,25 @@ import { ToastrService } from 'ngx-toastr';
 import { ApiService } from 'src/app/services/api.service';
 import { CustomPaginationService } from 'src/app/services/pagination-service';
 import { UploadS3Service } from 'src/app/services/s3.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-blogs',
-  templateUrl: './blogs.component.html',
-  styleUrls: ['./blogs.component.scss']
+  selector: 'app-advertisement',
+  templateUrl: './advertisement.component.html',
+  styleUrls: ['./advertisement.component.scss']
 })
-export class BlogsComponent implements OnInit {
+export class AdvertisementComponent implements OnInit {
   files: File[] = [];
   listDetails: Array<any>=[];
   count: any;
   htmlContent:any;
   addUpdate:String='Add';
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-      spellcheck: true,
-      height: '10rem',
-      minHeight: '5rem',
-      maxHeight: 'auto',
-      width: 'auto',
-      minWidth: '0',
-      translate: 'yes',
-      enableToolbar: true,
-      showToolbar: true,
-      placeholder: 'Enter text here...',
-      defaultParagraphSeparator: '',
-      defaultFontName: '',
-      defaultFontSize: '',
-      fonts: [
-        {class: 'arial', name: 'Arial'},
-        {class: 'times-new-roman', name: 'Times New Roman'},
-        {class: 'calibri', name: 'Calibri'},
-        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-      ],
-      customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-      ],
-      uploadUrl: environment.apiUrl+'s3/upload-image-to-s3',   
-  }
-  
+ 
   @ViewChild('myModal') myModal:any;
   private modalRef:any;
   form!: FormGroup;
   isLoading:boolean=false;
   image:any;
   constructor(private api: ApiService,private s3:UploadS3Service,private toast:ToastrService,
-    private httpClient: HttpClient,
      private pagination: CustomPaginationService,private modalService: ModalManager, public fb: FormBuilder) { }
 
   async ngOnInit() {
@@ -74,13 +33,15 @@ export class BlogsComponent implements OnInit {
     this.form = this.fb.group({
       id:[null],
       title:['',Validators.required],
-      description:['',Validators.required]
+      link:['',Validators.required],
+      section_type:['1',Validators.required],
+      common:true
     });
-    await this.getBlogList();
+    await this.getAdvertisement();
   }
-  async getBlogList() {
+  async getAdvertisement() {
     try {
-      let data = await this.api.post("blogs",{
+      let data = await this.api.post("advertisements",{
         "limit": 10000,
         "offset": 0
     });
@@ -104,8 +65,10 @@ export class BlogsComponent implements OnInit {
       this.addUpdate='Update';
       this.form.patchValue({
         id:item.id,
+        link:item.link,
+        section_type:1,
         title:item.title,
-        description:item.description
+        common:true
       })
       await this.getBase64FromUrl(item.image).then((result:any)=>{
         let zzz=this;
@@ -118,7 +81,9 @@ export class BlogsComponent implements OnInit {
       this.addUpdate='Add';
       this.form.patchValue({
         title:'',
-        description:''
+        link:'',
+        section_type:'',
+        common:true
       })
     }
     this.modalRef = this.modalService.open(this.myModal, {
@@ -161,7 +126,7 @@ closeModal(){
     //or this.modalRef.close();
 }
 
-async submitBlog(){
+async submitAdd(){
   this.isLoading=true;
   if(this.form.invalid){
     return
@@ -176,11 +141,11 @@ async submitBlog(){
   }
   this.form.value.image=this.image;
   try {
-    let data = await this.api.post('blogs/upsert',this.form.value)
+    let data = await this.api.post('advertisements/upsert',this.form.value)
     if(data.success){
       this.toast.success(data.message)
       this.closeModal();
-      await this.getBlogList();
+      await this.getAdvertisement();
       this.isLoading=false;
     } 
   } catch (error) {
@@ -204,8 +169,8 @@ async delete(item:any){
   try {
     let data = await this.api.post('blogs/upsert',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
-      await this.getBlogList();
+      this.toast.success("Advertisement deleted successfully");
+      await this.getAdvertisement();
     }
   } catch (error) {
   } 
