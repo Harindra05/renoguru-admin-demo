@@ -1,0 +1,39 @@
+<div id="pause" *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+</div>
+<div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Images</th>
+                    <th>Price</th>
+                    <th>Likes</th>
+                    <th>Views</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td>
+                        <img src="{{item.design_images[0].imageUrl?item.design_images[0].imageUrl:'assets/img/user.jpg'}}" alt="">
+                    </td>
+                    <td>{{item?.price | number}}</td>
+                    <td>{{item?.likes}}</td>
+                    <td>{{item?.views}}</td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" (click)="delete(item)">Delete</a></li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>

@@ -210,8 +210,8 @@ async delete(item:any){
   } catch (error) {
   } 
 }
- async uploadImage(a:any){
-  this.image  = await this.s3.uploadFile(a,'blogs/'+a?.lastModified+a.name);
-    this.image = this.image.Location;
-}
+//  async uploadImage(a:any){
+//   this.image  = await this.s3.uploadFile(a,'blogs/'+a?.lastModified+a.name);
+//     this.image = this.image.Location;
+// }
 }

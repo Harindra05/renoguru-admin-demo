@@ -7,29 +7,37 @@
         <i class="fa fa-user"></i> &nbsp;
         <a>Users</a>
     </li>
+    <li class="nav-item" routerLink='/interior-designer' routerLinkActive="active">
+        <i class="fa fa fa-users"></i> &nbsp;
+        <a>Designers</a>
+    </li>
+    <li class="nav-item" routerLink='/interior-designs' routerLinkActive="active">
+        <i class="fa fa-paint-brush"></i> &nbsp;
+        <a>Designs</a>
+    </li>
     <li class="nav-item" routerLink='/blogs' routerLinkActive="active">
         <i class="fa fa-th-large"></i> &nbsp;
         <a>Blogs</a>
     </li>
     <li class="nav-item" routerLink='/enquiry' routerLinkActive="active">
         <i class="fa fa-book" aria-hidden="true"></i> &nbsp;
-        <a>Enquiry</a>
+        <a>Enquires</a>
     </li>
     <li class="nav-item" routerLink='/advertisement' routerLinkActive="active">
         <i class="fa fa-adn" aria-hidden="true"></i> &nbsp;
-        <a>Advertisement</a>
+        <a>Advertisements</a>
     </li>
     <li class="nav-item" routerLink='/videos' routerLinkActive="active">
         <i class="fa fa-youtube-play" aria-hidden="true"></i> &nbsp;
-        <a>Video</a>
+        <a>Videos</a>
     </li>
     <li class="nav-item" routerLink='/inspirations' routerLinkActive="active">
-        <i class="fa fa-youtube-play" aria-hidden="true"></i> &nbsp;
+        <i class="fa fa-file" aria-hidden="true"></i> &nbsp;
         <a>Inspirations</a>
     </li>
     <li class="nav-item" routerLink='/trending' routerLinkActive="active">
-        <i class="fa fa-youtube-play" aria-hidden="true"></i> &nbsp;
-        <a>Trending</a>
+        <i class="fa fa-file" aria-hidden="true"></i> &nbsp;
+        <a>Trendings</a>
     </li>
 
     <li class="nav-item dropdown">
@@ -38,9 +46,11 @@
             Master Data
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item">Privacy policy</a></li>
-            <li><a class="dropdown-item">Terms and document</a></li>
-
+            <li><a class="dropdown-item" routerLink="/house-types">House Types</a></li>
+            <li><a class="dropdown-item" routerLink="/property-types">Property Types</a></li>
+            <li><a class="dropdown-item" routerLink="/trending-types">Trending Types</a></li>
+            <!-- <li><a class="dropdown-item">Privacy policy</a></li>
+            <li><a class="dropdown-item">Terms and document</a></li> -->
         </ul>
     </li>
 </ul>

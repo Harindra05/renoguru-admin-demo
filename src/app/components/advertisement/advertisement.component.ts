@@ -133,7 +133,7 @@ async submitAdd(){
   }
   else{
   if(this.files.length>0){
-    this.image  = await this.s3.uploadFile(this?.files[0],'blogs/'+this.files[0]?.lastModified+this.files[0].name);
+    this.image  = await this.s3.uploadFile(this?.files[0],'advertisements/'+this.files[0]?.lastModified+this.files[0].name);
     this.image = this.image.Location;
   }
   if(this.addUpdate=='Add'){
@@ -175,8 +175,8 @@ async delete(item:any){
   } catch (error) {
   } 
 }
- async uploadImage(a:any){
-  this.image  = await this.s3.uploadFile(a,'blogs/'+a?.lastModified+a.name);
-    this.image = this.image.Location;
-}
+//  async uploadImage(a:any){
+//   this.image  = await this.s3.uploadFile(a,'blogs/'+a?.lastModified+a.name);
+//     this.image = this.image.Location;
+// }
 }

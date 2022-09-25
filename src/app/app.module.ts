@@ -12,14 +12,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { AuthGuardService } from './auth/auth-guard.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginserviceService } from './auth/login.service';
-import { TrendingComponent } from './components/trending/trending.component';
-import { InspirationsComponent } from './components/inspirations/inspirations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-   
   ],
   imports: [
     BrowserModule,

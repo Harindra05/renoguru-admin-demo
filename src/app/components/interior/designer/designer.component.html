@@ -1,1 +1,130 @@
-<p>designer works!</p>
+<div id="pause" *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+</div>
+<div class="d-flex">
+    <i class="fa fa-users fa-2x"></i> &nbsp;
+    <h3>Designer</h3>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Dashboard</li>
+        <li class="breadcrumb-item active" aria-current="page">Designer</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="mb-3">
+        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Designer</button>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cover Image</th>
+                    <th>Logo</th>
+                    <th>Company Name</th>
+                    <th>Email</th>
+                    <th>Phone Nummber</th>
+                    <th>Address</th>
+                    <th>Description</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td [routerLink]="['/interior-designer/details',item.id]">
+                        <img src="{{item.coverImage?item.coverImage:'assets/img/user.jpg'}}" alt="">
+                    </td>
+                    <td [routerLink]="['/interior-designer/details',item.id]">
+                        <img src="{{item.logo?item.logo:'assets/img/user.jpg'}}" alt="">
+                    </td>
+                    <td [routerLink]="['/interior-designer/details',item.id]">{{item?.companyName}}</td>
+                    <td class="text-description" [routerLink]="['/interior-designer/details',item.id]">
+                        <p class="description">{{item?.description}}</p>
+                    </td>
+                    <td [routerLink]="['/interior-designer/details',item.id]">
+                        {{item?.email}}
+                    </td>
+                    <td [routerLink]="['/interior-designer/details',item.id]">
+                        {{item?.phoneNumber}}
+                    </td>
+                    <td [routerLink]="['/interior-designer/details',item.id]">
+                        {{item?.address}}
+                    </td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" [routerLink]="['/interior-designer/details',item.id]">View</a></li>
+                                <li><a class="dropdown-item" (click)="delete(item)">Delete</a></li>
+                                <!-- <hr class="dropdown-divider"> -->
+                                <li><a class="dropdown-item" (click)="openModal(item)">Update</a></li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
+<div class="row">
+    <modal #myModal>
+        <modal-header>
+            <h6>{{addUpdate}} Designer</h6>
+        </modal-header>
+        <modal-content>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <label for="file">Cover Image</label>
+                                <ngx-dropzone [multiple]="false" (change)="onSelect($event)">
+                                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+                            <div class="form-group">
+                                <label for="file">Logo</label>
+                                <ngx-dropzone [multiple]="false" (change)="onSelect1($event)">
+                                    <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of logo" [file]="f" [removable]="true" (removed)="onRemove1(f)">
+                                        <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                                    </ngx-dropzone-image-preview>
+                                </ngx-dropzone>
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Company Name</label>
+                                <input type="title" class="form-control" id="title" formControlName="companyName">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Email Id</label>
+                                <input type="title" class="form-control" id="title" formControlName="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Phone Number</label>
+                                <input type="title" class="form-control" id="title" formControlName="phoneNumber">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Address</label>
+                                <input type="title" class="form-control" id="title" formControlName="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <angular-editor [placeholder]="'Enter text here...'" formControlName="description" [config]="editorConfig"></angular-editor>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer>
+            <button class="btn btn-primary" (click)="submitDesigner()">submit</button>
+            <button class="btn btn-secondary ml-2" (click)="closeModal()">close</button>
+        </modal-footer>
+    </modal>
+</div>

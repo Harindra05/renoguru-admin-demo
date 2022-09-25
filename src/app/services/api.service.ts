@@ -52,9 +52,7 @@ export class ApiService {
         let userData: any;
         if (this.cookie.check('renoAdmin')) {
             if (this.cookie.get("renoAdmin")) {
-                userData = JSON.parse(this.cookie.get("renoAdmin"));
-                console.log(userData);
-                
+                userData = JSON.parse(this.cookie.get("renoAdmin")); 
             }
             this.httpOptions = {
                 headers: new HttpHeaders({

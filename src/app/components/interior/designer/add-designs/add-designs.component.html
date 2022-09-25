@@ -1,0 +1,61 @@
+<div id="pause" *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+</div>
+
+<div class="row">
+    <h6>Add Desigs</h6>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
+                <form [formGroup]="form">
+                    <div class="form-group">
+                        <label for="file">Images</label>
+                        <ngx-dropzone [multiple]="true" (change)="onSelect($event)">
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                                <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
+                            </ngx-dropzone-image-preview>
+                        </ngx-dropzone>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="title">Trending Types</label>
+                                <ng-select formControlName="trendingTypes" [multiple]="true">
+                                    <ng-option *ngFor="let data of trendingData" [value]="data.id">{{data.title}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="title">Property TypeId</label>
+                                <ng-select formControlName="propertyTypeId">
+                                    <ng-option *ngFor="let data of propertytypeIDs" [value]="data.id">{{data.title}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="title">Package Includes</label>
+                                <tag-input formControlName="packageIncludes"></tag-input>
+                                <!-- <input type="text" class="form-control" id="packageIncludes" > -->
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="title">Price</label>
+                                <input type="text" class="form-control" id="price" formControlName="price">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <angular-editor [placeholder]="'Enter text here...'" formControlName="description" [config]="editorConfig"></angular-editor>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex">
+        <button class="btn btn-primary" (click)="submitDesigs()">submit</button>
+    </div>
+</div>

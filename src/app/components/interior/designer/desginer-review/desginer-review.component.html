@@ -1,0 +1,51 @@
+<div id="pause" *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+</div>
+
+<div class="row">
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Renovation Cost</th>
+                    <th>Renovation Duration</th>
+                    <th>Ratings</th>
+                    <th>Review</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td>{{item.fullName}}</td>
+                    <td>{{item?.email}}</td>
+                    <td>{{item?.phoneNumber}}</td>
+                    <td>{{item?.renovationCost | number}}</td>
+                    <td>{{item?.renovationDuration}}</td>
+                    <td>
+                        <div>Average Rating: <span>{{item.average}}</span></div>
+                        <div>Design Concept : <span>{{item.designConcept}}</span></div>
+                        <div>Service Rendered : <span>{{item.serviceRendered}}</span></div>
+                        <div>Value For Money : <span>{{item.valueForMoney}}</span></div>
+                    </td>
+                    <td class="text-description">
+                        <p class="description">{{item?.review}}</p>
+                    </td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" (click)="delete(item)">Delete</a></li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>

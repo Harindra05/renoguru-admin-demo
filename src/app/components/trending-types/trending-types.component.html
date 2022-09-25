@@ -1,0 +1,76 @@
+<div id="pause" *ngIf="isLoading" class="d-flex align-items-center justify-content-center">
+    <div id="spinner"></div>
+</div>
+<div class="d-flex">
+    <i class="fa fa-file fa-2x"></i> &nbsp;
+    <h3>Trending Types</h3>
+</div>
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">Dashboard</li>
+        <li class="breadcrumb-item active" aria-current="page">Trending Types</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="mb-3">
+        <button class="btn btn-success f-right" (click)="openModal(0)" type="submit">Add Trending Types</button>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>Title</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of listDetails | paginate : count ;let i = index">
+                    <td>{{item.id}}</td>
+                    <td>{{item?.title}}</td>
+                    <td>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class='fa fa-bars'></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" (click)="delete(item)">Delete</a></li>
+                                <li><a class="dropdown-item" (click)="openModal(item)">Update</a></li>
+                            </ul>
+                        </li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="pageChange($event)" class="my-pagination"></pagination-controls>
+<div class="row">
+    <modal #myModal>
+        <modal-header>
+            <h6>{{addUpdate}} Trending Types</h6>
+        </modal-header>
+        <modal-content>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
+                        <form [formGroup]="form">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="title" class="form-control" id="title" formControlName="title">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </modal-content>
+        <modal-footer>
+            <button class="btn btn-primary" (click)="submitTrendingType()">submit</button>
+            <button class="btn btn-secondary ml-2" (click)="closeModal()">close</button>
+        </modal-footer>
+    </modal>
+</div>
