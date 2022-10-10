@@ -9,12 +9,50 @@
             <div class="col-xs-12 col-sm-12 col-md-12 col-md-offset-2 col-sm-offset-1">
                 <form [formGroup]="form">
                     <div class="form-group">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="title">Design Name</label>
+                                <input type="text" class="form-control" id="title" formControlName="title">
+                            </div>
+                        </div>
                         <label for="file">Images</label>
                         <ngx-dropzone [multiple]="true" (change)="onSelect($event)">
-                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                            <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files;let i=index" [file]="f" [removable]="true" (removed)="onRemove(f,i)">
                                 <!-- <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label> -->
                             </ngx-dropzone-image-preview>
                         </ngx-dropzone>
+                    </div>
+                    <div class="row">
+                        <ng-container *ngFor="let f of newItem;let i=index;">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="title">ImageInspirationType for Image {{i+1}}</label>
+                                    <select type="text" class="form-control" id="title" [(ngModel)]="f.imageInspirationType" [ngModelOptions]="{standalone: true}">
+                                        <option value="1">All</option>
+                                        <option value="2">Living</option>
+                                        <option value="3">Dining</option>
+                                        <option value="4">Bedroom</option>
+                                        <option value="5">Bathroom</option>
+                                        <option value="6">Kitchen</option>
+                                        <option value="7">Others</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="title">Area Range for Image {{i+1}}</label>
+                                    <select type="text" class="form-control" id="title" [(ngModel)]="f.areaRange" [ngModelOptions]="{standalone: true}">
+                                        <option value="0-30">0-30m</option>
+                                        <option value="30-60">0-60m</option>
+                                        <option value="60-90">60-90m</option>
+                                        <option value="90-120">90-120m</option>
+                                        <option value="120-150">120-150m</option>
+                                        <option value="150-180">150-180m</option>
+                                        <option value="180-200">180-200m</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </ng-container>
                     </div>
                     <div class="row">
                         <div class="col-6">

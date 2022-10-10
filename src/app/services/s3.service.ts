@@ -9,8 +9,6 @@ export class UploadS3Service {
   constructor() {}
   bucket:any;
  async uploadFile(file: any, filePath: any) {
-    console.log(file);
-    
     return new Promise((resolve, reject) => {
       const contentType = file.type;
       const bucket = new S3({
@@ -36,10 +34,10 @@ export class UploadS3Service {
  async deleteFile(file:any) {
     var aa=file.split(".com/")
     var img=aa[1].split("/")
-    console.log(img[1]);
-    console.log(aa[1]);
+    // console.log(img[1]);
+    // console.log(aa[1]);
    const str=aa[1].replace(/%20/g, " ");
-   console.log(str);
+  //  console.log(str);
     // console.log(aa[1]);
     if(img[1]){
       const params = {

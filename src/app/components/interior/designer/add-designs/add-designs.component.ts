@@ -14,7 +14,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./add-designs.component.scss']
 })
 export class AddDesignsComponent implements OnInit {
-  files: File[] = [];
+  files: any[] = [];
+  newItem:Array<any>=[]
   editorConfig: AngularEditorConfig = {
     editable: true,
       spellcheck: true,
@@ -65,6 +66,7 @@ export class AddDesignsComponent implements OnInit {
     this.form = this.fb.group({
       designerId:this.designerId,
       trendingTypes:['', Validators.required],
+      title:['', Validators.required],
       propertyTypeId:['', Validators.required],
       packageIncludes:['', Validators.required],
       description:['',Validators.required],
@@ -115,11 +117,16 @@ async submitDesigs(){
       try {
         let response = await this.s3.uploadFile(file,'designs/'+file?.lastModified+file.name)
           const url = await(response as any).Location;
-          this.image.push({imageUrl:url,imageInspirationType:i});     
+          this.image.push({imageUrl:url});     
       } catch (error) {
         console.error(error);
       }
     }
+  }
+  for (let i = 0; i < this.image.length; i++) {
+    const element = this.image[i];
+    element.imageInspirationType=this.newItem[i].imageInspirationType
+    element.areaRange=this.newItem[i].areaRange
   }
   this.form.value.images=this.image;
   this.form.value.trendingTypes=this.form.value.trendingTypes
@@ -140,9 +147,13 @@ async submitDesigs(){
 }
 }
 onSelect(event:any) {
-  this.files.push(...event.addedFiles); 
+  this.files.push(...event.addedFiles);
+  for (let i = 0; i < event.addedFiles.length; i++) {
+    this.newItem.push({imageInspirationType:null,areaRange:null})
+  }
 }
-onRemove(event:any) {
+onRemove(event:any,index:any) {
   this.files.splice(this.files.indexOf(event), 1);
+  this.newItem.splice(index,1)
 }
 }
