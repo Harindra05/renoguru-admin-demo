@@ -26,7 +26,7 @@
                         <ng-container *ngFor="let f of newItem;let i=index;">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="title">ImageInspirationType for Image {{i+1}}</label>
+                                    <label for="title">Image {{i+1}} Keyword</label>
                                     <select type="text" class="form-control" id="title" [(ngModel)]="f.imageInspirationType" [ngModelOptions]="{standalone: true}">
                                         <option value="1">All</option>
                                         <option value="2">Living</option>
@@ -42,13 +42,16 @@
                                 <div class="form-group">
                                     <label for="title">Area Range for Image {{i+1}}</label>
                                     <select type="text" class="form-control" id="title" [(ngModel)]="f.areaRange" [ngModelOptions]="{standalone: true}">
-                                        <option value="0-30">0-30m</option>
-                                        <option value="30-60">0-60m</option>
-                                        <option value="60-90">60-90m</option>
-                                        <option value="90-120">90-120m</option>
-                                        <option value="120-150">120-150m</option>
-                                        <option value="150-180">150-180m</option>
-                                        <option value="180-200">180-200m</option>
+                                        <option value="30-50">30-50sqm</option>
+                                        <option value="51-80">51-80sqm</option>
+                                        <option value="81-120">81-120sqm</option>
+                                        <option value="121-180">121-180sqm</option>
+                                        <option value="181-250">181-250sqm</option>
+                                        <option value="251-350">251-350sqm</option>
+                                        <option value="351-500">351-500sqm</option>
+                                        <option value="501-700">501-700sqm</option>
+                                        <option value="701-900">701-900sqm</option>
+                                        <option value="901-150000">951sqm & more</option>
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +68,7 @@
                         </div>
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="title">Property TypeId</label>
+                                <label for="title">Property Type</label>
                                 <ng-select formControlName="propertyTypeId">
                                     <ng-option *ngFor="let data of propertytypeIDs" [value]="data.id">{{data.title}}</ng-option>
                                 </ng-select>
