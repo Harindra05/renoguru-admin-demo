@@ -26,16 +26,19 @@
                         <ng-container *ngFor="let f of newItem;let i=index;">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="title">Image {{i+1}} Keyword</label>
-                                    <select type="text" class="form-control" id="title" [(ngModel)]="f.imageInspirationType" [ngModelOptions]="{standalone: true}">
-                                        <option value="1">All</option>
+                                    <label for="title">Image {{i+1}} InspirationType</label>
+                                    <ng-select [(ngModel)]="f.imageInspirationType" [ngModelOptions]="{standalone: true}" [multiple]="false">
+                                        <ng-option *ngFor="let data of inspirationTypes" [value]="data.id">{{data.title}}</ng-option>
+                                    </ng-select>
+                                    <!-- <select type="text" class="form-control" id="title" [(ngModel)]="f.imageInspirationType" >
+                                        <option value="1" *ngFor="">All</option>
                                         <option value="2">Living</option>
                                         <option value="3">Dining</option>
                                         <option value="4">Bedroom</option>
                                         <option value="5">Bathroom</option>
                                         <option value="6">Kitchen</option>
                                         <option value="7">Others</option>
-                                    </select>
+                                    </select> -->
                                 </div>
                             </div>
                             <div class="col-6">

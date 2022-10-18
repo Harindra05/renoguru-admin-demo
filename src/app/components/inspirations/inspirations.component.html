@@ -36,7 +36,7 @@
                         <img src="{{item.image?item.image:'assets/img/user.jpg'}}" alt="">
                     </td>
                     <td>{{item?.title}}</td>
-                    <td>{{item.type==1 ? 'All': item.type==2 ? 'Living' : item.type==3 ? 'Dining' : item.type==4 ? 'Bedroom' : item.type==5 ? 'Bathroom' : item.type==6 ? 'Kitchen':'Others'}}</td>
+                    <td>{{item?.master_insipiration?.title}}</td>
                     <td>
                         <p class="description">{{item?.description}}</p>
                     </td>
@@ -82,6 +82,13 @@
                                 <input type="title" class="form-control" id="title" formControlName="title">
                             </div>
                             <div class="form-group">
+                                <label for="title">Inspiration Type</label>
+                                <ng-select formControlName="type" [multiple]="false">
+                                    <ng-option *ngFor="let data of inspirationTypes" [value]="data.id">{{data.title}}</ng-option>
+                                </ng-select>
+                            </div>
+
+                            <!-- <div class="form-group">
                                 <label for="title">Inspiration type</label>
                                 <select type="text" class="form-control" id="title" formControlName="type">
                                     <option value="1">All</option>
@@ -92,7 +99,7 @@
                                     <option value="6">Kitchen</option>
                                     <option value="7">Others</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <angular-editor [placeholder]="'Enter text here...'" formControlName="description" [config]="editorConfig"></angular-editor>

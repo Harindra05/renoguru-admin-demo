@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 export class InspirationsComponent implements OnInit {
   files: File[] = [];
   listDetails: Array<any>=[];
+  inspirationTypes:Array<any>=[];
   count: any;
   htmlContent:any;
   addUpdate:String='Add';
@@ -78,6 +79,21 @@ export class InspirationsComponent implements OnInit {
       description:['',Validators.required]
     });
     await this.getInspirationList();
+    await this.getInspirationType();
+  }
+  async getInspirationType() {
+    try {
+      let data = await this.api.post("house-types",{
+        "limit": 10000,
+        "offset": 0
+    });
+    if(data.success){
+      this.isLoading=false;
+      this.inspirationTypes=data.data.rows;
+    }
+    } catch (error) {
+      this.isLoading=false;
+    }
   }
   async getInspirationList() {
     try {
@@ -203,9 +219,10 @@ onRemove(event:any) {
 async delete(item:any){
   let items:any=item;
   delete items.createdAt
+  delete items.master_insipiration
   items.deletedAt=new Date()
   try {
-    let data = await this.api.post('blogs/upsert',items);
+    let data = await this.api.post('inspirations/upsert',items);
     if(data.success){
       this.toast.success("Blog deleted successfully");
       await this.getInspirationList();

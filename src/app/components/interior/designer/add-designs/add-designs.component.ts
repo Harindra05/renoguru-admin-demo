@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AddDesignsComponent implements OnInit {
   files: any[] = [];
+  inspirationTypes:Array<any>=[];
   newItem:Array<any>=[]
   editorConfig: AngularEditorConfig = {
     editable: true,
@@ -74,6 +75,21 @@ export class AddDesignsComponent implements OnInit {
     });
     await this.getTrendingTypes()
     await this.getPropertyTypesID();
+    await this.getInspirationType();
+  }
+  async getInspirationType() {
+    try {
+      let data = await this.api.post("house-types",{
+        "limit": 10000,
+        "offset": 0
+    });
+    if(data.success){
+      this.isLoading=false;
+      this.inspirationTypes=data.data.rows;
+    }
+    } catch (error) {
+      this.isLoading=false;
+    }
   }
   async getPropertyTypesID() {
     try {
