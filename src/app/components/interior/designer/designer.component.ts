@@ -235,11 +235,17 @@ onRemove1(event:any) {
 async delete(item:any){
   let items:any=item;
   delete items.createdAt
+  // delete items.logo
+  // delete items.phoneNumber
+  // delete items.totalDesigns
+  // delete items.totalPhotosUploaded
+  // delete items.totalReviewCount
+  // delete items.address
   items.deletedAt=new Date()
   try {
     let data = await this.api.post('designs/create-designer',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
+      this.toast.success("Designers deleted successfully");
       await this.getDesginerList();
     }
   } catch (error) {

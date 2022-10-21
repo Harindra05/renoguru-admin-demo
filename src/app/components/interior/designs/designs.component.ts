@@ -201,7 +201,7 @@ async delete(item:any){
   try {
     let data = await this.api.post('designs/add-design',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
+      this.toast.success("Designs deleted successfully");
       await this.getDesginerList();
     }
   } catch (error) {
