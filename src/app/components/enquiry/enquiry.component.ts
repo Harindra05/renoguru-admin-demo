@@ -19,6 +19,7 @@ export class EnquiryComponent implements OnInit {
     this.getEnquiryList();
   }
   async getEnquiryList() {
+    this.listDetails=[]
     try {
       let data = await this.api.post("enquiry/list",{
         "limit": 500,
@@ -38,7 +39,7 @@ export class EnquiryComponent implements OnInit {
     try {
       let data = await this.api.post('auth/delete',{userId:item});
       if(data.success){
-        this.toast.success("User deleted successfully");
+        this.toast.error("User deleted successfully");
         await this.getEnquiryList();
       }
     } catch (error) {

@@ -40,6 +40,7 @@ export class AdvertisementComponent implements OnInit {
     await this.getAdvertisement();
   }
   async getAdvertisement() {
+    this.listDetails=[]
     try {
       let data = await this.api.post("advertisements",{
         "limit": 10000,
@@ -165,11 +166,13 @@ onRemove(event:any) {
 async delete(item:any){
   let items:any=item;
   delete items.createdAt
+  delete items.updatedAt
+  delete items.track_count
   items.deletedAt=new Date()
   try {
-    let data = await this.api.post('blogs/upsert',items);
+    let data = await this.api.post('advertisements/upsert',items);
     if(data.success){
-      this.toast.success("Advertisement deleted successfully");
+      this.toast.error("Advertisement deleted successfully");
       await this.getAdvertisement();
     }
   } catch (error) {

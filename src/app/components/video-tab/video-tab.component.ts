@@ -79,6 +79,7 @@ export class VideoTabComponent implements OnInit {
     await this.getVideoList();
   }
   async getVideoList() {
+    this.listDetails=[];
     try {
       let data = await this.api.post("videos",{
         "limit": 10000,
@@ -138,7 +139,7 @@ export class VideoTabComponent implements OnInit {
     try {
       let data = await this.api.post('videos/upsert',items);
       if(data.success){
-        this.toast.success("video deleted successfully");
+        this.toast.error("video deleted successfully");
         await this.getVideoList();
       }
     } catch (error) {

@@ -82,6 +82,7 @@ export class DesignerComponent implements OnInit {
     await this.getDesginerList();
   }
   async getDesginerList() {
+    this.listDetails=[];
     try {
       let data = await this.api.post("designs/get-designers",{
         "limit": 10000,
@@ -233,21 +234,14 @@ onRemove1(event:any) {
   this.logo.splice(this.logo.indexOf(event), 1);
 }
 async delete(item:any){
-  let items:any=item;
-  delete items.createdAt
-  // delete items.logo
-  // delete items.phoneNumber
-  // delete items.totalDesigns
-  // delete items.totalPhotosUploaded
-  // delete items.totalReviewCount
-  // delete items.address
-  items.deletedAt=new Date()
+  let items:any={id:item.id};
   try {
-    let data = await this.api.post('designs/create-designer',items);
+    let data = await this.api.post('designs/delete-designer',items);
     if(data.success){
-      this.toast.success("Designers deleted successfully");
+      this.toast.error("Designers deleted successfully");
       await this.getDesginerList();
     }
+    await this.getDesginerList();
   } catch (error) {
   } 
 }

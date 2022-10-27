@@ -36,7 +36,7 @@
                         <img src="{{item.image?item.image:'assets/img/user.jpg'}}" alt="">
                     </td>
                     <td>{{item?.title}}</td>
-                    <td>{{item.type==1 ? 'Scandinavian': item.type==2 ? 'Minimalist' : item.type==3 ? 'Modern' : item.type==4 ? 'Contemporary' : 'Industrial'}}</td>
+                    <td>{{item.type==0 ? 'Scandinavian': item.type==1 ? 'Minimalist' : item.type==2 ? 'Modern' : item.type==3 ? 'Contemporary' : 'Industrial'}}</td>
                     <td>
                         <p class="description">{{item?.description}}</p>
                     </td>

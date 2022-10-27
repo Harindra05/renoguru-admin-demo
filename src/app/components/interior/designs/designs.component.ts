@@ -76,6 +76,7 @@ export class DesignsComponent implements OnInit {
     await this.getDesginerList();
   }
   async getDesginerList() {
+    this.listDetails=[];
     try {
       let data = await this.api.post("designs/get-designs",{
         "limit": 10000,
@@ -195,13 +196,11 @@ onRemove(event:any) {
   this.files.splice(this.files.indexOf(event), 1);
 }
 async delete(item:any){
-  let items:any=item;
-  delete items.createdAt
-  items.deletedAt=new Date()
+  let items:any={id:item.id};
   try {
-    let data = await this.api.post('designs/add-design',items);
+    let data = await this.api.post('designs/delete',items);
     if(data.success){
-      this.toast.success("Designs deleted successfully");
+      this.toast.error("Designs deleted successfully");
       await this.getDesginerList();
     }
   } catch (error) {

@@ -24,6 +24,7 @@ export class DesignerDesignsComponent implements OnInit {
     await this.getDesignList();
   }
   async getDesignList() {
+    this.listDetails=[]
     try {
       let data = await this.api.post("designs/get-designs",{
         "limit": 10000,
@@ -51,7 +52,7 @@ async delete(item:any){
   try {
     let data = await this.api.post('designs/create-designer',items);
     if(data.success){
-      this.toast.warning("Designs deleted");
+      this.toast.error("Designs deleted");
       await this.getDesignList();
     }
   } catch (error) {

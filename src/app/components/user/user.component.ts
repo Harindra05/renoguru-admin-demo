@@ -19,6 +19,7 @@ export class UserComponent implements OnInit {
     this.getUserList();
   }
   async getUserList() {
+    this.listDetails=[];
     try {
       let data = await this.api.post("auth/admin/users",{
         "limit": 500,
@@ -38,7 +39,7 @@ export class UserComponent implements OnInit {
     try {
       let data = await this.api.post('auth/delete',{userId:item});
       if(data.success){
-        this.toast.success("User deleted successfully");
+        this.toast.error("User deleted successfully");
         await this.getUserList();
       }
     } catch (error) {

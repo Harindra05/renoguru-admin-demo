@@ -33,6 +33,7 @@ export class TrendingTypesComponent implements OnInit {
     await this.getTrendingTypes();
   }
   async getTrendingTypes() {
+    this.listDetails=[];
     try {
       let data = await this.api.post("trending-types",{
         "limit": 10000,

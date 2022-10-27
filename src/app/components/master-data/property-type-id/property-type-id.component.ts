@@ -6,11 +6,11 @@ import { ApiService } from 'src/app/services/api.service';
 import { CustomPaginationService } from 'src/app/services/pagination-service';
 
 @Component({
-  selector: 'app-house-types',
-  templateUrl: './house-types.component.html',
-  styleUrls: ['./house-types.component.scss']
+  selector: 'app-property-type-id',
+  templateUrl: './property-type-id.component.html',
+  styleUrls: ['./property-type-id.component.scss']
 })
-export class HouseTypesComponent implements OnInit {
+export class PropertyTypeIdComponent implements OnInit {
   listDetails: Array<any>=[];
   count: any;
   addUpdate:String='Add';
@@ -30,11 +30,12 @@ export class HouseTypesComponent implements OnInit {
       id:[null],
       title:['',Validators.required],
     });
-    await this.getHouseTypes();
+    await this.getPropertyTypesID();
   }
-  async getHouseTypes() {
+  async getPropertyTypesID() {
+    this.listDetails=[];
     try {
-      let data = await this.api.post("house-types",{
+      let data = await this.api.post("property-types",{
         "limit": 10000,
         "offset": 0
     });
@@ -98,11 +99,11 @@ async submitHouseType(){
     delete this.form.value.id
   }
   try {
-    let data = await this.api.post('house-types/upsert',this.form.value)
+    let data = await this.api.post('property-types/upsert',this.form.value)
     if(data.success){
       this.toast.success(data.message)
       this.closeModal();
-      await this.getHouseTypes();
+      await this.getPropertyTypesID();
       this.isLoading=false;
     } 
   } catch (error) {
@@ -115,10 +116,10 @@ async delete(item:any){
   delete items.createdAt
   items.deletedAt=new Date()
   try {
-    let data = await this.api.post('house-types/upsert',items);
+    let data = await this.api.post('property-types/upsert',items);
     if(data.success){
-      await this.getHouseTypes();
-      this.toast.error("House type deleted successfully");
+      await this.getPropertyTypesID();
+      this.toast.error("property type deleted successfully");
     }
   } catch (error) {
   } 

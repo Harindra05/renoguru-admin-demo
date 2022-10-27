@@ -136,6 +136,8 @@ export class TrendingComponent implements OnInit {
     })
     this.isLoading=false;
   } catch (error) {
+    console.log(error);
+    
     this.isLoading=false
   }
   
@@ -204,9 +206,9 @@ async delete(item:any){
   delete items.createdAt
   items.deletedAt=new Date()
   try {
-    let data = await this.api.post('blogs/upsert',items);
+    let data = await this.api.post('trendings/upsert',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
+      this.toast.error("Treding deleted successfully");
       await this.getTrendingList();
     }
   } catch (error) {

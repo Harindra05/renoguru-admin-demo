@@ -82,6 +82,7 @@ export class InspirationsComponent implements OnInit {
     await this.getInspirationType();
   }
   async getInspirationType() {
+    this.inspirationTypes=[]
     try {
       let data = await this.api.post("house-types",{
         "limit": 10000,
@@ -96,6 +97,7 @@ export class InspirationsComponent implements OnInit {
     }
   }
   async getInspirationList() {
+    this.listDetails=[]
     try {
       let data = await this.api.post("inspirations",{
         "limit": 10000,
@@ -224,7 +226,7 @@ async delete(item:any){
   try {
     let data = await this.api.post('inspirations/upsert',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
+      this.toast.error("Inspiration deleted successfully");
       await this.getInspirationList();
     }
   } catch (error) {

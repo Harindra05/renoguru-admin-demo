@@ -79,6 +79,7 @@ export class BlogsComponent implements OnInit {
     await this.getBlogList();
   }
   async getBlogList() {
+    this.listDetails=[]
     try {
       let data = await this.api.post("blogs",{
         "limit": 10000,
@@ -204,7 +205,7 @@ async delete(item:any){
   try {
     let data = await this.api.post('blogs/upsert',items);
     if(data.success){
-      this.toast.success("Blog deleted successfully");
+      this.toast.error("Blog deleted successfully");
       await this.getBlogList();
     }
   } catch (error) {
